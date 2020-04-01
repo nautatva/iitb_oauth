@@ -1,5 +1,11 @@
+[![PyPI version](https://badge.fury.io/py/iitb-oauth.svg)](https://badge.fury.io/py/iitb-oauth)
+![Travis-ci](https://api.travis-ci.org/nautatva/iitb_oauth.svg)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/iitb-oauth.svg)](https://pypi.org/project/iitb-oauth/)
+[![PyPI license](https://img.shields.io/pypi/l/iitb-oauth.svg)](https://pypi.org/project/iitb-oauth/)
+
+
 # Django Oauth2 Client to authenticate using IIT Bombay gymkhana SSO
-A small package for authentication using IIT Bombay gymkhana SSO.
+A small package for LDAP authentication using IIT Bombay gymkhana SSO.
 
 
 ## Motivation

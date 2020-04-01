@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>iitb-sso DEMO</title>
+</head>
+
+<body>
+    <h1>iitb-sso DEMO</h1>
+    SSO server: <a href="https://gymkhana.iitb.ac.in/sso/"> https://gymkhana.iitb.ac.in/sso/ </a>
+    <hr>
+    {% if user.is_authenticated %}
+    hello {{ user }}
+    , <a href="/logout">logout</a>
+    <ul>
+        <li>username: {{ user.username }}</li>
+        <li>last name: {{ user.last_name }}</li>
+        <li>first name: {{ user.first_name }}</li>
+        <li>email: {{ user.email }}</li>
+        <li>last login: {{ user.last_login }}</li>
+
+        <li>Special Permissions:</li>
+        <ul>
+            {% if user.is_superuser %}
+            <li>Superuser</li>
+            {% elif user.is_staff %}
+            <li>Staff</li>
+            {% else %}
+            <li>None</li>
+            {% endif %}
+        </ul>
+        {% else %}
+        <a href="/login/">login</a>
+        {% endif %}
+
+
+
+</body>
+
+</html>

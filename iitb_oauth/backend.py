@@ -14,30 +14,42 @@ class OauthBackend(ModelBackend):
         self.access_token = None
         self.request = None
         self.UserModel = get_user_model()
-        self.FIELDS = get_django_setting_or_default('FIELDS', '')
+        self.FIELDS = get_django_setting_or_default("FIELDS", "")
         self.PROFILE_URL = (
-            "https://gymkhana.iitb.ac.in/sso/user/api/user/?fields=" + self.FIELDS  # join fields when passed in authenticate
+            "https://gymkhana.iitb.ac.in/sso/user/api/user/?fields="
+            + self.FIELDS  # join fields when passed in authenticate
         )
         self.GRANT_TYPE = "authorization_code"
         self.TOKEN_URL = "https://gymkhana.iitb.ac.in/sso/oauth/token/"
 
     def authenticate(self, request=None, code=None, **kwargs):
         if code is None:
-            print("code must be present in response from SSO server. LDAP login skipped, Passing on to next auth backend")
+            print(
+                "code must be present in response from SSO server. LDAP login skipped, Passing on to next auth backend"
+            )
             return None
         if request is None:
             print("empty request")
             return None
         self.request = request
         data = (
-            "code=" + code + "&redirect_uri=" + settings.REDIRECT_URI + "&grant_type=" + self.GRANT_TYPE
+            "code="
+            + code
+            + "&redirect_uri="
+            + settings.REDIRECT_URI
+            + "&grant_type="
+            + self.GRANT_TYPE
         )
 
         auth_response = requests.post(
             self.TOKEN_URL,
             data=data,
             headers={
-                "Authorization": "Basic " + base64.b64encode(f"{settings.CLIENT_ID}:{settings.CLIENT_SECRET}".encode("utf-8")).decode("utf-8"), "Content-Type": "application/x-www-form-urlencoded",
+                "Authorization": "Basic "
+                + base64.b64encode(
+                    f"{settings.CLIENT_ID}:{settings.CLIENT_SECRET}".encode("utf-8")
+                ).decode("utf-8"),
+                "Content-Type": "application/x-www-form-urlencoded",
             },
             verify=True,
         )
@@ -48,15 +60,18 @@ class OauthBackend(ModelBackend):
         if "access_token" not in auth_response.json():
             return HttpResponse("no access_token", status=400)
         else:
-            request.session["access_token"] = self.access_token = auth_response.json()["access_token"]
+            request.session["access_token"] = self.access_token = auth_response.json()[
+                "access_token"
+            ]
 
         user = self.setup_user()
         return user
 
     def get_or_create_user(self, user_info):
         try:
-            user = self.UserModel.objects.get(**{
-                self.UserModel.USERNAME_FIELD: user_info["roll_number"]})
+            user = self.UserModel.objects.get(
+                **{self.UserModel.USERNAME_FIELD: user_info["roll_number"]}
+            )
             return user
 
         except self.UserModel.DoesNotExist:
@@ -64,16 +79,21 @@ class OauthBackend(ModelBackend):
                 self.UserModel.USERNAME_FIELD: user_info["username"],
             }
 
-            for custom_user_field, recieved_ldap_object in get_django_setting_or_default('MAPPINGS', {}).items():
-                mappings[custom_user_field] = check_key_and_get(user_info, recieved_ldap_object)
+            for (
+                custom_user_field,
+                recieved_ldap_object,
+            ) in get_django_setting_or_default("MAPPINGS", {}).items():
+                mappings[custom_user_field] = check_key_and_get(
+                    user_info, recieved_ldap_object
+                )
 
-            if check_key_and_get(user_info, "email") == '':
+            if check_key_and_get(user_info, "email") == "":
                 # if email not provided
-                mappings[self.UserModel.EMAIL_FIELD] = f"{user_info['username']}@iitb.ac.in"
+                mappings[
+                    self.UserModel.EMAIL_FIELD
+                ] = f"{user_info['username']}@iitb.ac.in"
 
-            user, created = self.UserModel.objects.get_or_create(
-                **mappings
-            )
+            user, created = self.UserModel.objects.get_or_create(**mappings)
 
             return user
 

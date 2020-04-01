@@ -19,4 +19,4 @@ def check_key_and_get(my_dict, key):
         raise ValueError("key must be specified")
     if key in my_dict:
         return my_dict[key]
-    return ''
+    return ""

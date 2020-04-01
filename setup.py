@@ -14,7 +14,7 @@ with open("README.md", "r") as fh:
 setup(
     name='iitb_oauth',
     version='1.0',
-    author='Nautatva Navlakha',
+    author='Nautatava Navlakha',
     author_email="nnautatva@gmail.com",
     url="https://github.com/nautatva/iitb_oauth/",
     description="Django app for authentication using IIT Bombay gymkhana SSO.",

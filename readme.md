@@ -3,7 +3,7 @@ A small package for authentication using IIT Bombay gymkhana SSO.
 
 
 ## Motivation
-SSO can be a tricky thing to setup and bugs can be time consuming to debug. When people are quickly moving away from PHP to Django and node, this module can be quickly used to to define custom callbacks that map the user details obtained from the authority to your Django user model. You get a quick and easy way to programatically create users once they are authenticated.
+SSO can be a tricky thing to setup and bugs can be time consuming to debug. With people moving away from PHP to Django and node, this module can be used to quickly define custom callbacks that map the user details obtained from IIT Bombay gymkhana SSO to your Django user model. You get a quick and easy way to programatically create users once they are authenticated.
 
 
 ## Setting up in your app
@@ -26,7 +26,6 @@ AUTHENTICATION_BACKENDS = [
 ```
 
 Step 2:  Add the oauth urls to the root website:
-
 ```python
 urlpatterns = [
     # ...
@@ -37,7 +36,7 @@ urlpatterns = [
 
 
 Step 3: Add the LOGIN_URL and corresponding OAUTH config settings for your application. 
-Also add the FALLBACK_URL as a fallback in case OAuth authentication fails. Example:
+Also add the `FALLBACK_URL` as a fallback in case OAuth authentication fails. Example:
 
 ```python
 LOGIN_URL = "/login/"
@@ -67,7 +66,7 @@ MAPPINGS = {
 
 
 ## Usage
-Once you try to access some endpoint that has the `@login_required` decorator on top of it, you'll be redirected to the login URI that you defined. The user is authenticated using IITB gymkhana SSO and any other backends you provided. Upon successful authentication the user urls are called and the callbacks are used to shape your user into the form that you've provided. If authentication fails due to any reason or if the user does not have permission, he will be redirected to the URI specified in `FALLBACK_URL`.
+Once you try to access some endpoint that has the `@login_required` decorator on top of it, you'll be redirected to the login URI that you defined. The user is authenticated using IITB gymkhana SSO and any other backends you provided. Upon successful authentication the url specified in `LOGIN_COMPLETE_REDIRECT` are called and the callbacks are used to shape your user into the form that you've provided. If authentication fails due to any reason or if the user does not have permission, he will be redirected to the URI specified in `FALLBACK_URL`.
 
 
 ## License

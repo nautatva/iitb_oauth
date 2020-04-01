@@ -18,7 +18,7 @@ setup(
     author_email="nnautatva@gmail.com",
     url="https://github.com/nautatva/iitb_oauth/",
     description="Django app for authentication using IIT Bombay gymkhana SSO.",
-    long_description=read("README.md"),
+    long_description=read("readme.md"),
     long_description_content_type="text/markdown",
     python_requires='>1.1.1',
     install_requires=[

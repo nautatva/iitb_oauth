@@ -127,11 +127,11 @@ STATIC_URL = '/static/'
 
 LOGIN_URL = '/login/'
 
-CLIENT_ID = 'xped3f4Q6iRfvN5weDWrF4vufDMEEzsxow7rm9EF'
-CLIENT_SECRET = "5hj6DgAvzvhZUlUdnLw2cuB2mOpoL5Wf58yIBZruCBiOedxZtAV7p8unQfBrDCoDEVDMmqHOJT9bKUPmms81htzTBxyaJXH3ltMzIf8gqWDNu7jasupdMYePPSbwfHDp"
+CLIENT_ID = ''
+CLIENT_SECRET = ''
 SCOPE = 'profile ldap program'  # ldap is necessary for login, pass only necessary scopes
-FIELDS = 'username,first_name,last_name,email,roll_number' # username is mandatory field
-REDIRECT_URI = 'http://127.0.0.1:8000/complete/'  # Redirect to /complete
+FIELDS = 'username,first_name,last_name,email,roll_number'  # username is mandatory field
+REDIRECT_URI = ''  # Redirect to /complete
 LOGIN_COMPLETE_REDIRECT = '/'
 FALLBACK_URL = '/'
 LOGOUT_REDIRECT = '/'

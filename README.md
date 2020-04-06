@@ -77,4 +77,3 @@ Once you try to access some endpoint that has the `@login_required` decorator on
 
 ## License
 MIT
-

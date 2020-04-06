@@ -12,8 +12,7 @@ script: tox
 deploy:
   provider: pypi
   user: __token__
-  password:
-    secure: pypi-AgEIcHlwaS5vcmcCJDU4NDg3MDlhLTY0NTQtNDIxNy04YzA4LTNkMjRkODk5Nzk3MwACO3sicGVybWlzc2lvbnMiOiB7InByb2plY3RzIjogWyJpaXRiLW9hdXRoIl19LCAidmVyc2lvbiI6IDF9AAAGIKb8HruAcSzaBHJwl7XhvVAM_TNxjqPRHvThuSFkrQqR
+  password: pypi-AgEIcHlwaS5vcmcCJDU4NDg3MDlhLTY0NTQtNDIxNy04YzA4LTNkMjRkODk5Nzk3MwACO3sicGVybWlzc2lvbnMiOiB7InByb2plY3RzIjogWyJpaXRiLW9hdXRoIl19LCAidmVyc2lvbiI6IDF9AAAGIKb8HruAcSzaBHJwl7XhvVAM_TNxjqPRHvThuSFkrQqR
   skip_existing: true
   distributions: sdist bdist_wheel
   on:

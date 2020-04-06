@@ -13,7 +13,7 @@ setup(
     author="Nautatava Navlakha",
     author_email="nnautatva@gmail.com",
     description="Django app for LDAP authentication using IIT Bombay gymkhana SSO.",
-    long_description=read("readme.md"),
+    long_description=read("README.md"),
     long_description_content_type="text/markdown",
     python_requires=">1.1.1",
     install_requires=["Django", "requests",],

@@ -70,7 +70,7 @@ class OauthBackend(ModelBackend):
     def get_or_create_user(self, user_info):
         try:
             user = self.UserModel.objects.get(
-                **{self.UserModel.USERNAME_FIELD: user_info["roll_number"]}
+                **{self.UserModel.USERNAME_FIELD: user_info["username"]}
             )
             return user
 
@@ -93,8 +93,12 @@ class OauthBackend(ModelBackend):
                     self.UserModel.EMAIL_FIELD
                 ] = f"{user_info['username']}@iitb.ac.in"
 
-            user, created = self.UserModel.objects.get_or_create(**mappings)
+            user, _ = self.UserModel.objects.get_or_create(**mappings)
 
+            if get_django_setting_or_default("AUTH_PROFILE_MODULE",''):
+                print(get_django_setting_or_default("AUTH_PROFILE_MODULE",''))
+            print(user)
+            
             return user
 
     def setup_user(self):

@@ -12,7 +12,7 @@
     <hr>
     {% if user.is_authenticated %}
     hello {{ user }}
-    , <a href="/logout">logout</a>
+    , <a href="/oauth/logout">logout</a>
     <ul>
         <li>username: {{ user.username }}</li>
         <li>last name: {{ user.last_name }}</li>
@@ -31,7 +31,7 @@
             {% endif %}
         </ul>
         {% else %}
-        <a href="/login/">login</a>
+        <a href="/oauth/login/">login</a>
         {% endif %}
 
 

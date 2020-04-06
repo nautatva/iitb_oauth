@@ -119,17 +119,17 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-LOGIN_URL = "/login/"
+LOGIN_URL = "/oauth/login/"
 
-CLIENT_ID = ""
-CLIENT_SECRET = ""
+CLIENT_ID = "WBNMgrsd3WAeamQeqzPQSZ4q1z3kJJe9tIgw6cxU"
+CLIENT_SECRET = "Xtsad0NoqYjAeKUBuyfoRNIIAAPDKN4prIh2Uv77DK5xLZgzqKaFtLocjYXjAiXyR6LEha5uLNCYWO9incOVeHnSjuBYeiWCpJZ2byR5zagyIXHaLs7TXUASYeruXjda"
 SCOPE = (
     "profile ldap program"  # ldap is necessary for login, pass only necessary scopes
 )
 FIELDS = (
     "username,first_name,last_name,email,roll_number"  # username is mandatory field
 )
-REDIRECT_URI = ""  # Redirect to /complete
+REDIRECT_URI = "http://127.0.0.1:8000/oauth/complete/"  # Redirect to /complete
 LOGIN_COMPLETE_REDIRECT = "/"
 FALLBACK_URL = "/"
 LOGOUT_REDIRECT = "/"

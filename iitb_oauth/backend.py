@@ -95,10 +95,10 @@ class OauthBackend(ModelBackend):
 
             user, _ = self.UserModel.objects.get_or_create(**mappings)
 
-            if get_django_setting_or_default("AUTH_PROFILE_MODULE",''):
-                print(get_django_setting_or_default("AUTH_PROFILE_MODULE",''))
+            if get_django_setting_or_default("AUTH_PROFILE_MODULE", ""):
+                print(get_django_setting_or_default("AUTH_PROFILE_MODULE", ""))
             print(user)
-            
+
             return user
 
     def setup_user(self):

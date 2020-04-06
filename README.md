@@ -45,6 +45,7 @@ Step 3: Add the LOGIN_URL and corresponding OAUTH config settings for your appli
 Also add the `FALLBACK_URL` as a fallback in case OAuth authentication fails. Example:
 
 ```python
+AUTH_PROFILE_MODULE = ""  # In case User has a user profile, specify the class here
 LOGIN_URL = "/login/"
 FALLBACK_URL = "/" # In case user is not logged in or doesn't have enough permissions to view the content
 
@@ -68,6 +69,11 @@ MAPPINGS = {
     "first_name": "first_name",
     "last_name": "last_name"
 }  # In case a custom User model is defined, map fields in User model: "LDAP attributes"
+PROFILE_MAPPING = {
+    # Maps fields in user profile with response recieved from sso server.
+    # AUTH_PROFILE_MODULE needs to be specified for this to work.
+    "roll_number" : "roll_number"
+}
 ```
 
 

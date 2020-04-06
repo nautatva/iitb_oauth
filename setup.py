@@ -9,7 +9,7 @@ def read(*parts):
 
 setup(
     name="iitb_oauth",
-    version="1.1",
+    version="1.2",
     author="Nautatava Navlakha",
     author_email="nnautatva@gmail.com",
     description="Django app for LDAP authentication using IIT Bombay gymkhana SSO.",

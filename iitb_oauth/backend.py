@@ -1,6 +1,7 @@
 import base64
 
 import requests
+from django.apps import apps
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
@@ -96,9 +97,21 @@ class OauthBackend(ModelBackend):
             user, _ = self.UserModel.objects.get_or_create(**mappings)
 
             if get_django_setting_or_default("AUTH_PROFILE_MODULE", ""):
-                print(get_django_setting_or_default("AUTH_PROFILE_MODULE", ""))
-            print(user)
-
+                profile = apps.get_model(settings.AUTH_PROFILE_MODULE)
+                if profile is None:
+                    raise ValueError(
+                        "Unable to load the profile model, check AUTH_PROFILE_MODULE in your project settings"
+                    )
+                else:
+                    profile_mapping = {}
+                    for (
+                        custom_user_field,
+                        recieved_ldap_object,
+                    ) in get_django_setting_or_default("PROFILE_MAPPING", {}).items():
+                        profile_mapping[custom_user_field] = check_key_and_get(
+                            user_info, recieved_ldap_object
+                        )
+                    profile.objects.create(user=user, **profile_mapping)
             return user
 
     def setup_user(self):
